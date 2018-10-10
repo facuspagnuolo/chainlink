@@ -84,6 +84,11 @@ func TestIntegration_HelloWorld(t *testing.T) {
 		eth.Register("eth_sendRawTransaction", attempt2Hash)
 	})
 	newHeads <- models.BlockHeader{Number: cltest.BigHexInt(confirmed - 1)} // 23459: For Gas Bump
+	jr = cltest.WaitForJobRunToPendConfirmations(t, app.Store, jr)
+
+	// FIXME: Since heads are not queued, runs flick to running then back to
+	// pending, need a way to wait for this process to cycle without racing
+	time.Sleep(3 * time.Second)
 
 	eth.Context("ethTx.Perform()#3 at block 23460", func(eth *cltest.EthMock) {
 		eth.Register("eth_blockNumber", utils.Uint64ToHex(confirmed))
@@ -91,6 +96,9 @@ func TestIntegration_HelloWorld(t *testing.T) {
 		eth.Register("eth_getTransactionReceipt", confirmedReceipt)
 	})
 	newHeads <- models.BlockHeader{Number: cltest.BigHexInt(confirmed)} // 23460
+	jr = cltest.WaitForJobRunToPendConfirmations(t, app.Store, jr)
+
+	time.Sleep(3 * time.Second)
 
 	eth.Context("ethTx.Perform()#4 at block 23465", func(eth *cltest.EthMock) {
 		eth.Register("eth_blockNumber", utils.Uint64ToHex(safe))
@@ -98,6 +106,8 @@ func TestIntegration_HelloWorld(t *testing.T) {
 		eth.Register("eth_getTransactionReceipt", confirmedReceipt)
 	})
 	newHeads <- models.BlockHeader{Number: cltest.BigHexInt(safe)} // 23465
+
+	time.Sleep(3 * time.Second)
 
 	jr = cltest.WaitForJobRunToComplete(t, app.Store, jr)
 
@@ -296,6 +306,8 @@ func TestIntegration_ExternalAdapter_RunLogInitiated(t *testing.T) {
 	assert.Equal(t, eaExtra, res.String())
 }
 
+// This test ensures that the response body of an external adapter are supplied
+// as params to the successive task
 func TestIntegration_ExternalAdapter_Copy(t *testing.T) {
 	t.Parallel()
 
@@ -346,6 +358,9 @@ func TestIntegration_ExternalAdapter_Copy(t *testing.T) {
 	assert.Equal(t, eaQuote, res.String())
 }
 
+// This test ensures that an bridge adapter task is resumed from pending after
+// sending out a request to an external adapter and waiting to receive a
+// request back
 func TestIntegration_ExternalAdapter_Pending(t *testing.T) {
 	t.Parallel()
 
