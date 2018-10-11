@@ -1,16 +1,17 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import matchRouteAndMapDispatchToProps from 'utils/matchRouteAndMapDispatchToProps'
 import Typography from '@material-ui/core/Typography'
 import Grid from '@material-ui/core/Grid'
 import PaddedCard from 'components/PaddedCard'
 import Breadcrumb from 'components/Breadcrumb'
 import BreadcrumbItem from 'components/BreadcrumbItem'
+import TextField from '@material-ui/core/TextField'
 import { Button } from '@material-ui/core'
-import { withStyles } from '@material-ui/core/styles'
-import { connect } from 'react-redux'
-import { fetchBridgeSpec } from 'actions'
 import { bridgeSelector } from 'selectors'
-import matchRouteAndMapDispatchToProps from 'utils/matchRouteAndMapDispatchToProps'
+import { connect } from 'react-redux'
+import { withStyles } from '@material-ui/core/styles'
+import { fetchBridgeSpec } from 'actions'
 import ReactStaticLinkComponent from 'components/ReactStaticLinkComponent'
 
 const styles = theme => ({
@@ -30,24 +31,43 @@ const renderLoading = props => (
 const renderLoaded = props => (
   <div className={props.classes.card}>
     <PaddedCard>
-      <Grid>
-        <Typography variant='subheading' color='textSecondary'>Name</Typography>
-        <Typography variant='body1' color='inherit'>{props.bridge.name}</Typography>
+      <Grid container spacing={24}>
+        <Grid item xs={12}>
+          <TextField
+            label='Name'
+            value={props.bridge.name}
+            disabled
+          />
+        </Grid>
 
-        <Typography variant='subheading' color='textSecondary'>URL</Typography>
-        <Typography variant='body1' color='inherit'>{props.bridge.url}</Typography>
+        <Grid item xs={12}>
+          <TextField
+            label='URL'
+            value={props.bridge.url}
+          />
+        </Grid>
 
-        <Typography variant='subheading' color='textSecondary'>Confirmations</Typography>
-        <Typography variant='body1' color='inherit'>{props.bridge.confirmations}</Typography>
+        <Grid item xs={12}>
+          <TextField
+            label='Confirmations'
+            value={props.bridge.confirmations}
+            inputProps={{min: 0}}
+          />
+        </Grid>
 
-        <Typography variant='subheading' color='textSecondary'>Minimum Contract Payment</Typography>
-        <Typography variant='body1' color='inherit'>{props.bridge.minimumContractPayment}</Typography>
+        <Grid item xs={12}>
+          <TextField
+            label='Minimum Contract Payment'
+            value={props.bridge.minimumContractPayment}
+            inputProps={{min: 0}}
+          />
+        </Grid>
 
-        <Typography variant='subheading' color='textSecondary'>Incoming Token</Typography>
-        <Typography variant='body1' color='inherit'>{props.bridge.incomingToken}</Typography>
-
-        <Typography variant='subheading' color='textSecondary'>Outgoing Token</Typography>
-        <Typography variant='body1' color='inherit'>{props.bridge.outgoingToken}</Typography>
+        <Grid item xs={12}>
+          <Button variant='contained' color='primary' type='submit'>
+            Save Bridge
+          </Button>
+        </Grid>
       </Grid>
     </PaddedCard>
   </div>
@@ -55,12 +75,12 @@ const renderLoaded = props => (
 
 const renderDetails = props => props.bridge ? renderLoaded(props) : renderLoading(props)
 
-export class BridgeSpec extends Component {
+export class BridgeEdit extends Component {
   componentDidMount () {
     this.props.fetchBridgeSpec(this.props.match.params.bridgeId)
   }
 
-  render () {
+  render() {
     return (
       <Grid container>
         <Grid item xs={12}>
@@ -87,9 +107,9 @@ export class BridgeSpec extends Component {
                       variant='outlined'
                       color='primary'
                       component={ReactStaticLinkComponent}
-                      to={`/bridges/${this.props.bridge.id}/edit`}
+                      to={`/bridges/${this.props.bridge.id}`}
                     >
-                      Edit
+                      Cancel
                     </Button>
                   }
                 </Grid>
@@ -104,7 +124,7 @@ export class BridgeSpec extends Component {
   }
 }
 
-BridgeSpec.propTypes = {
+BridgeEdit.propTypes = {
   classes: PropTypes.object.isRequired,
   bridge: PropTypes.object
 }
@@ -118,6 +138,6 @@ const mapStateToProps = (state, ownProps) => {
 export const ConnectedBridgeSpec = connect(
   mapStateToProps,
   matchRouteAndMapDispatchToProps({fetchBridgeSpec})
-)(BridgeSpec)
+)(BridgeEdit)
 
 export default withStyles(styles)(ConnectedBridgeSpec)

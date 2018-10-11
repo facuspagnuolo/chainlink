@@ -21,6 +21,7 @@ export default {
       {path: '/job_specs/_jobSpecId_/runs/id/_jobRunId_'},
       {path: '/bridges'},
       {path: '/bridges/_bridgeName_'},
+      {path: '/bridges/_bridgeName_/edit'},
       {path: '/config'},
       {path: '/signin'},
       {path: '/signout'},

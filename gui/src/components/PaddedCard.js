@@ -12,7 +12,7 @@ const styles = theme => ({
   }
 })
 
-const PaddedCard = ({children, classes}) => (
+const PaddedCard = ({children, classes, className}) => (
   <Card className={classes.card}>
     {children}
   </Card>

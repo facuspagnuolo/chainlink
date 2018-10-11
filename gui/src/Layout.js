@@ -28,6 +28,7 @@ import { isFetchingSelector } from 'selectors'
 const uniOpts = {loading: Loading}
 const Bridges = universal(import('./containers/Bridges'), uniOpts)
 const BridgeSpec = universal(import('./containers/BridgeSpec'), uniOpts)
+const BridgeEdit = universal(import('./containers/BridgeEdit'), uniOpts)
 const Configuration = universal(import('./containers/Configuration'), uniOpts)
 const CreateBridgeType = universal(import('./containers/CreateBridgeType'), uniOpts)
 const CreateJobSpec = universal(import('./containers/CreateJobSpec'), uniOpts)
@@ -187,6 +188,7 @@ class Layout extends Component {
                   <PrivateRoute exact path='/create/bridge' component={CreateBridgeType} />
                   <PrivateRoute exact path='/bridges' component={Bridges} />
                   <PrivateRoute exact path='/bridges/:bridgeId' component={BridgeSpec} />
+                  <PrivateRoute exact path='/bridges/:bridgeId/edit' component={BridgeEdit} />
                   <PrivateRoute exact path='/' component={Jobs} />
                   <PrivateRoute exact path='/jobs/page/:jobPage' component={Jobs} />
                   <Routes />
