@@ -291,6 +291,7 @@ func BuildRun(job models.JobSpec, initiator models.Initiator, store *store.Store
 	return job.NewRun(initiator), nil
 }
 
+// FIXME: Save name suggests disk write, which I'd like to avoid
 // SaveInput stores the input against the run, which means:
 // 1) Merging with overrides
 // 2) Saving as the input to the next task
