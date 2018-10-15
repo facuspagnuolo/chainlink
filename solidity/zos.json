@@ -2,5 +2,9 @@
   "zosversion": "2",
   "name": "chainlink-eth",
   "version": "1.0.0",
-  "contracts": {}
+  "contracts": {
+    "Oracle": "Oracle",
+    "Chainlinked": "Chainlinked",
+    "Coordinator": "Coordinator"
+  }
 }
