@@ -3,8 +3,9 @@ pragma solidity ^0.4.24;
 import "openzeppelin-zos/contracts/ownership/Ownable.sol";
 import "openzeppelin-zos/contracts/math/SafeMath.sol";
 import "link_token/contracts/LinkToken.sol";
+import "zos-lib/contracts/Initializable.sol";
 
-contract Oracle is Ownable {
+contract Oracle is Initializable, Ownable {
   using SafeMath for uint256;
 
   LinkToken internal LINK;
@@ -20,7 +21,7 @@ contract Oracle is Ownable {
   // We initialize fields to 1 instead of 0 so that the first invocation
   // does not cost more gas.
   uint256 constant private oneForConsistentGasCost = 1;
-  uint256 private withdrawableWei = oneForConsistentGasCost;
+  uint256 private withdrawableWei;
 
   mapping(uint256 => Callback) private callbacks;
 
@@ -38,6 +39,7 @@ contract Oracle is Ownable {
   );
 
   function initialize(address _link, address _sender) public initializer {
+    withdrawableWei =  oneForConsistentGasCost;
     LINK = LinkToken(_link);
     Ownable.initialize(_sender);
   }

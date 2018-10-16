@@ -5,8 +5,9 @@ import "./ENSResolver.sol";
 import "./Oracle.sol";
 import "@ensdomains/ens/contracts/ENS.sol";
 import "link_token/contracts/LinkToken.sol";
+import "zos-lib/contracts/Initializable.sol";
 
-contract Chainlinked {
+contract Chainlinked is Initializable {
   using ChainlinkLib for ChainlinkLib.Run;
   using SafeMath for uint256;
 
@@ -15,7 +16,7 @@ contract Chainlinked {
 
   LinkToken private link;
   Oracle private oracle;
-  uint256 private requests = 1;
+  uint256 private requests;
   mapping(bytes32 => address) private unfulfilledRequests;
 
   ENS private ens;
@@ -26,6 +27,10 @@ contract Chainlinked {
   event ChainlinkRequested(bytes32 id);
   event ChainlinkFulfilled(bytes32 id);
   event ChainlinkCancelled(bytes32 id);
+
+  function initialize() public initializer {
+    requests = 1;
+  }
 
   function newRun(
     bytes32 _specId,
