@@ -1,0 +1,373 @@
+{
+  "contracts": {
+    "Coordinator": {
+      "address": "0xc73a22acae190e5246df3e9b453a1888a2dd2457",
+      "constructorCode": "608060405234801561001057600080fd5b50610c5e806100206000396000f300",
+      "bodyBytecodeHash": "4ae3c5fbf5fa621d9bcdf11b4a70ed5c8947d1ad1322b8ec7f3868058c004bef",
+      "localBytecodeHash": "aedadcb837579a71b74e631587ad79008c7f790c5380fd117ec3b104376ef3d6",
+      "deployedBytecodeHash": "aedadcb837579a71b74e631587ad79008c7f790c5380fd117ec3b104376ef3d6",
+      "types": {
+        "t_struct<Coordinator.ServiceAgreement>": {
+          "id": "t_struct<Coordinator.ServiceAgreement>",
+          "kind": "struct",
+          "label": "Coordinator.ServiceAgreement",
+          "members": [
+            {
+              "label": "payment",
+              "astId": 616,
+              "type": "t_uint256",
+              "src": "216:15:2"
+            },
+            {
+              "label": "expiration",
+              "astId": 618,
+              "type": "t_uint256",
+              "src": "237:18:2"
+            },
+            {
+              "label": "oracles",
+              "astId": 621,
+              "type": "t_array:dyn<t_address>",
+              "src": "261:17:2"
+            },
+            {
+              "label": "requestDigest",
+              "astId": 623,
+              "type": "t_bytes32",
+              "src": "284:21:2"
+            }
+          ]
+        },
+        "t_uint256": {
+          "id": "t_uint256",
+          "kind": "elementary",
+          "label": "uint256"
+        },
+        "t_array:dyn<t_address>": {
+          "id": "t_array:dyn<t_address>",
+          "valueType": "t_address",
+          "length": "dyn",
+          "kind": "array",
+          "label": "address[]"
+        },
+        "t_bytes32": {
+          "id": "t_bytes32",
+          "kind": "elementary",
+          "label": "bytes32"
+        },
+        "t_mapping<t_struct<Coordinator.ServiceAgreement>>": {
+          "id": "t_mapping<t_struct<Coordinator.ServiceAgreement>>",
+          "valueType": "t_struct<Coordinator.ServiceAgreement>",
+          "label": "mapping(key => Coordinator.ServiceAgreement)",
+          "kind": "mapping"
+        }
+      },
+      "storage": [
+        {
+          "contract": "Coordinator",
+          "path": "contracts/Coordinator.sol",
+          "label": "serviceAgreements",
+          "astId": 628,
+          "type": "t_mapping<t_struct<Coordinator.ServiceAgreement>>",
+          "src": "314:61:2"
+        }
+      ],
+      "warnings": {
+        "hasConstructor": false,
+        "hasSelfDestruct": false,
+        "hasDelegateCall": false,
+        "hasInitialValuesInDeclarations": false,
+        "uninitializedBaseContracts": []
+      }
+    },
+    "Oracle": {
+      "address": "0x145849c4deeb36b5500481abfeb3d688dbe357a1",
+      "constructorCode": "608060405234801561001057600080fd5b50611d20806100206000396000f300",
+      "bodyBytecodeHash": "867c3874a37c456a92a9726ddf3a4e6ede0e8e11b616a2faa55343f5eb104502",
+      "localBytecodeHash": "7f13172c4f1e20959be81e7874d70c513e0ea4c1b4cf167dc8eb9c8531655cae",
+      "deployedBytecodeHash": "7f13172c4f1e20959be81e7874d70c513e0ea4c1b4cf167dc8eb9c8531655cae",
+      "types": {
+        "t_bool": {
+          "id": "t_bool",
+          "kind": "elementary",
+          "label": "bool"
+        },
+        "t_array:50<t_uint256>": {
+          "id": "t_array:50<t_uint256>",
+          "valueType": "t_uint256",
+          "length": "50",
+          "kind": "array",
+          "label": "uint256[50]"
+        },
+        "t_address": {
+          "id": "t_address",
+          "kind": "elementary",
+          "label": "address"
+        },
+        "t_uint256": {
+          "id": "t_uint256",
+          "kind": "elementary",
+          "label": "uint256"
+        },
+        "t_struct<Oracle.Callback>": {
+          "id": "t_struct<Oracle.Callback>",
+          "kind": "struct",
+          "label": "Oracle.Callback",
+          "members": [
+            {
+              "label": "externalId",
+              "astId": 869,
+              "type": "t_bytes32",
+              "src": "359:18:5"
+            },
+            {
+              "label": "amount",
+              "astId": 871,
+              "type": "t_uint256",
+              "src": "383:14:5"
+            },
+            {
+              "label": "addr",
+              "astId": 873,
+              "type": "t_address",
+              "src": "403:12:5"
+            },
+            {
+              "label": "functionId",
+              "astId": 875,
+              "type": "t_bytes4",
+              "src": "421:17:5"
+            },
+            {
+              "label": "cancelExpiration",
+              "astId": 877,
+              "type": "t_uint64",
+              "src": "444:23:5"
+            }
+          ]
+        },
+        "t_bytes32": {
+          "id": "t_bytes32",
+          "kind": "elementary",
+          "label": "bytes32"
+        },
+        "t_bytes4": {
+          "id": "t_bytes4",
+          "kind": "elementary",
+          "label": "bytes4"
+        },
+        "t_uint64": {
+          "id": "t_uint64",
+          "kind": "elementary",
+          "label": "uint64"
+        },
+        "t_mapping<t_struct<Oracle.Callback>>": {
+          "id": "t_mapping<t_struct<Oracle.Callback>>",
+          "valueType": "t_struct<Oracle.Callback>",
+          "label": "mapping(key => Oracle.Callback)",
+          "kind": "mapping"
+        }
+      },
+      "storage": [
+        {
+          "contract": "Initializable",
+          "path": "zos-lib/contracts/Initializable.sol",
+          "label": "initialized",
+          "astId": 4416,
+          "type": "t_bool",
+          "src": "749:24:30"
+        },
+        {
+          "contract": "Initializable",
+          "path": "zos-lib/contracts/Initializable.sol",
+          "label": "initializing",
+          "astId": 4418,
+          "type": "t_bool",
+          "src": "868:25:30"
+        },
+        {
+          "contract": "Initializable",
+          "path": "zos-lib/contracts/Initializable.sol",
+          "label": "______gap",
+          "astId": 4467,
+          "type": "t_array:50<t_uint256>",
+          "src": "1883:29:30"
+        },
+        {
+          "contract": "Ownable",
+          "path": "openzeppelin-zos/contracts/ownership/Ownable.sol",
+          "label": "_owner",
+          "astId": 3771,
+          "type": "t_address",
+          "src": "301:22:27"
+        },
+        {
+          "contract": "Ownable",
+          "path": "openzeppelin-zos/contracts/ownership/Ownable.sol",
+          "label": "______gap",
+          "astId": 3876,
+          "type": "t_array:50<t_uint256>",
+          "src": "2057:29:27"
+        },
+        {
+          "contract": "Oracle",
+          "path": "contracts/Oracle.sol",
+          "label": "LINK",
+          "astId": 867,
+          "type": "t_address",
+          "src": "309:23:5"
+        },
+        {
+          "contract": "Oracle",
+          "path": "contracts/Oracle.sol",
+          "label": "withdrawableWei",
+          "astId": 883,
+          "type": "t_uint256",
+          "src": "634:31:5"
+        },
+        {
+          "contract": "Oracle",
+          "path": "contracts/Oracle.sol",
+          "label": "callbacks",
+          "astId": 887,
+          "type": "t_mapping<t_struct<Oracle.Callback>>",
+          "src": "670:46:5"
+        }
+      ],
+      "warnings": {
+        "hasConstructor": false,
+        "hasSelfDestruct": false,
+        "hasDelegateCall": true,
+        "hasInitialValuesInDeclarations": false,
+        "uninitializedBaseContracts": []
+      }
+    },
+    "Chainlinked": {
+      "address": "0x351a3ade48e74fd9a295e1e66f0737fbb55a6438",
+      "constructorCode": "608060405234801561001057600080fd5b506101d7806100206000396000f300",
+      "bodyBytecodeHash": "72fe61d460b22f6ed0a9f56b02dac3c1180530f8e0fc9e2131837207988b8187",
+      "localBytecodeHash": "992a095dd1d73c6e88bb36a8faa99f5f4088c554c676f8b7bfbabab2c3ec434c",
+      "deployedBytecodeHash": "992a095dd1d73c6e88bb36a8faa99f5f4088c554c676f8b7bfbabab2c3ec434c",
+      "types": {
+        "t_bool": {
+          "id": "t_bool",
+          "kind": "elementary",
+          "label": "bool"
+        },
+        "t_array:50<t_uint256>": {
+          "id": "t_array:50<t_uint256>",
+          "valueType": "t_uint256",
+          "length": "50",
+          "kind": "array",
+          "label": "uint256[50]"
+        },
+        "t_address": {
+          "id": "t_address",
+          "kind": "elementary",
+          "label": "address"
+        },
+        "t_uint256": {
+          "id": "t_uint256",
+          "kind": "elementary",
+          "label": "uint256"
+        },
+        "t_mapping<t_address>": {
+          "id": "t_mapping<t_address>",
+          "valueType": "t_address",
+          "label": "mapping(key => address)",
+          "kind": "mapping"
+        },
+        "t_bytes32": {
+          "id": "t_bytes32",
+          "kind": "elementary",
+          "label": "bytes32"
+        }
+      },
+      "storage": [
+        {
+          "contract": "Initializable",
+          "path": "zos-lib/contracts/Initializable.sol",
+          "label": "initialized",
+          "astId": 4416,
+          "type": "t_bool",
+          "src": "749:24:30"
+        },
+        {
+          "contract": "Initializable",
+          "path": "zos-lib/contracts/Initializable.sol",
+          "label": "initializing",
+          "astId": 4418,
+          "type": "t_bool",
+          "src": "868:25:30"
+        },
+        {
+          "contract": "Initializable",
+          "path": "zos-lib/contracts/Initializable.sol",
+          "label": "______gap",
+          "astId": 4467,
+          "type": "t_array:50<t_uint256>",
+          "src": "1883:29:30"
+        },
+        {
+          "contract": "Chainlinked",
+          "path": "contracts/Chainlinked.sol",
+          "label": "link",
+          "astId": 307,
+          "type": "t_address",
+          "src": "459:22:1"
+        },
+        {
+          "contract": "Chainlinked",
+          "path": "contracts/Chainlinked.sol",
+          "label": "oracle",
+          "astId": 309,
+          "type": "t_address",
+          "src": "485:21:1"
+        },
+        {
+          "contract": "Chainlinked",
+          "path": "contracts/Chainlinked.sol",
+          "label": "requests",
+          "astId": 311,
+          "type": "t_uint256",
+          "src": "510:24:1"
+        },
+        {
+          "contract": "Chainlinked",
+          "path": "contracts/Chainlinked.sol",
+          "label": "unfulfilledRequests",
+          "astId": 315,
+          "type": "t_mapping<t_address>",
+          "src": "538:55:1"
+        },
+        {
+          "contract": "Chainlinked",
+          "path": "contracts/Chainlinked.sol",
+          "label": "ens",
+          "astId": 317,
+          "type": "t_address",
+          "src": "598:15:1"
+        },
+        {
+          "contract": "Chainlinked",
+          "path": "contracts/Chainlinked.sol",
+          "label": "ensNode",
+          "astId": 319,
+          "type": "t_bytes32",
+          "src": "617:23:1"
+        }
+      ],
+      "warnings": {
+        "hasConstructor": false,
+        "hasSelfDestruct": false,
+        "hasDelegateCall": false,
+        "hasInitialValuesInDeclarations": false,
+        "uninitializedBaseContracts": []
+      }
+    }
+  },
+  "solidityLibs": {},
+  "proxies": {},
+  "zosversion": "2",
+  "version": "1.0.0"
+}
