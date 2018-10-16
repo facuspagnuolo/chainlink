@@ -1,7 +1,7 @@
 pragma solidity ^0.4.24;
 
-import "openzeppelin-solidity/contracts/ownership/Ownable.sol";
-import "openzeppelin-solidity/contracts/math/SafeMath.sol";
+import "openzeppelin-zos/contracts/ownership/Ownable.sol";
+import "openzeppelin-zos/contracts/math/SafeMath.sol";
 import "link_token/contracts/LinkToken.sol";
 
 contract Oracle is Ownable {
@@ -37,8 +37,9 @@ contract Oracle is Ownable {
     uint256 internalId
   );
 
-  constructor(address _link) Ownable() public {
+  function initialize(address _link, address _sender) public initializer {
     LINK = LinkToken(_link);
+    Ownable.initialize(_sender);
   }
 
   function onTokenTransfer(
